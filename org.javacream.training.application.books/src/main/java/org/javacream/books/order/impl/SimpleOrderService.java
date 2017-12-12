@@ -8,13 +8,12 @@ import org.javacream.books.order.api.OrderStatus;
 import org.javacream.books.warehouse.api.BooksService;
 import org.javacream.store.api.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SimpleOrderService implements OrderService{
 
-	@Autowired @Qualifier("traced")
+	@Autowired //@Qualifier("traced")
 	private StoreService storeService;
 	@Autowired
 	private BooksService booksService;

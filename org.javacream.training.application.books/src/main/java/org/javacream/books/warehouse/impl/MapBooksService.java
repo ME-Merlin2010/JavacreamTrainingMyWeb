@@ -37,11 +37,11 @@ public class MapBooksService implements BooksService {
 	}
 
 
-	@Autowired @Qualifier("traced-sequence")
+	@Autowired @Qualifier("sequence")//@Qualifier("traced-sequence")
 	private IsbnGenerator isbnGenerator;
 	private Map<String, Book> books;
 
-	@Autowired @Qualifier("traced")
+	@Autowired //@Qualifier("traced")
 	private StoreService storeService;
 	
 	{

@@ -14,7 +14,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.StatementCallback;
@@ -36,7 +35,8 @@ public class BooksServiceTest {
 	@Autowired
 	private BooksService booksService;
 
-	@Autowired @Qualifier("traced") private StoreService storeService;
+	@Autowired //@Qualifier("traced") 
+	private StoreService storeService;
 	@Autowired
 	DataSource dataSource;
 
@@ -78,11 +78,13 @@ public class BooksServiceTest {
 		System.out.println(booksService.getClass().getName());
 		System.out.println(storeService.getClass().getName());
 	}
-	@Test public void testCastWithoutProxyOk(){
+	//@Test 
+	public void testCastWithoutProxyOk(){
 		@SuppressWarnings("unused")
 		MapBooksService mapBooksService = (MapBooksService) booksService;
 	}
-	@Test(expected=ClassCastException.class) public void testCastWithProxyMustFail(){
+	//@Test(expected=ClassCastException.class) 
+	public void testCastWithProxyMustFail(){
 		@SuppressWarnings("unused")
 		JdbcStoreService jdbcStoreService = (JdbcStoreService) storeService;
 	}
