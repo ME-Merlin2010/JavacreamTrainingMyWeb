@@ -10,6 +10,8 @@
 		ignore-unresolvable="true" location="application.properties" />
 	<import resource="isbngenerator.xml" />
 	<import resource="datasource.xml" />
+	<import resource="jta.xml" />
+	<import resource="jpa.xml" />
 	<!-- <import resource="aop.xml" /> -->
 	<import resource="aspectj.xml" /> 
 </beans>

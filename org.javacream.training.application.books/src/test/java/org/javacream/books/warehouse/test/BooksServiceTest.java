@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.sql.DataSource;
 
 import org.javacream.books.warehouse.api.BooksService;
@@ -19,6 +21,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.StatementCallback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 
@@ -83,9 +86,17 @@ public class BooksServiceTest {
 		@SuppressWarnings("unused")
 		MapBooksService mapBooksService = (MapBooksService) booksService;
 	}
-	//@Test(expected=ClassCastException.class) 
+	@Test(expected=ClassCastException.class) 
 	public void testCastWithProxyMustFail(){
 		@SuppressWarnings("unused")
 		JdbcStoreService jdbcStoreService = (JdbcStoreService) storeService;
+	}
+	
+	@PersistenceContext private EntityManager entityManager;
+
+	
+	@Test @Transactional public void testEntityManager(){
+		Assert.assertNotNull(entityManager);
+		entityManager.createNativeQuery("insert into messages values ('JPA')").executeUpdate();
 	}
 }
