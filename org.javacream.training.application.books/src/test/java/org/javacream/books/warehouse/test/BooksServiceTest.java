@@ -7,11 +7,14 @@ import java.sql.Statement;
 import javax.sql.DataSource;
 
 import org.javacream.books.warehouse.api.BooksService;
+import org.javacream.books.warehouse.impl.MapBooksService;
 import org.javacream.store.api.StoreService;
+import org.javacream.store.impl.JdbcStoreService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.StatementCallback;
@@ -33,7 +36,7 @@ public class BooksServiceTest {
 	@Autowired
 	private BooksService booksService;
 
-	@Autowired private StoreService storeService;
+	@Autowired @Qualifier("traced") private StoreService storeService;
 	@Autowired
 	DataSource dataSource;
 
@@ -69,5 +72,18 @@ public class BooksServiceTest {
 		Assert.assertEquals(42, storeService.getStock("books", "ISBN1"));
 		Assert.assertEquals(200, storeService.getStock("books", "ISBN3"));
 		Assert.assertEquals(0, storeService.getStock("irgend", "was"));
+	}
+	
+	@Test public void testTypes(){
+		System.out.println(booksService.getClass().getName());
+		System.out.println(storeService.getClass().getName());
+	}
+	@Test public void testCastWithoutProxyOk(){
+		@SuppressWarnings("unused")
+		MapBooksService mapBooksService = (MapBooksService) booksService;
+	}
+	@Test(expected=ClassCastException.class) public void testCastWithProxyMustFail(){
+		@SuppressWarnings("unused")
+		JdbcStoreService jdbcStoreService = (JdbcStoreService) storeService;
 	}
 }

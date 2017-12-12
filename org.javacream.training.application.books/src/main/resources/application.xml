@@ -10,4 +10,6 @@
 		ignore-unresolvable="true" location="application.properties" />
 	<import resource="isbngenerator.xml" />
 	<import resource="datasource.xml" />
+	<import resource="aop.xml" />
+	
 </beans>

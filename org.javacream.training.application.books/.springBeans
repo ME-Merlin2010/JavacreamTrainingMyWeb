@@ -9,6 +9,7 @@
 	<configs>
 		<config>src/main/resources/application.xml</config>
 		<config>src/main/resources/datasource.xml</config>
+		<config>src/main/resources/aop.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
