@@ -1,6 +1,11 @@
 package org.javacream.books.warehouse.test;
 
+import java.sql.Connection;
+
+import javax.sql.DataSource;
+
 import org.javacream.books.warehouse.api.BooksService;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,24 +27,18 @@ public class BooksServiceTest {
 	@Autowired
 	private BooksService booksService;
 
+	@Autowired DataSource dataSource;
 	@Test
 	
 	public void testSpring() {
 		TestActor.doTest(booksService);
 	}
-//	public void testBusinessObjects() {
-//		MapBooksService mapBooksService = new MapBooksService();
-//		RandomIsbnGenerator randomIsbnGenerator = new RandomIsbnGenerator();
-//		randomIsbnGenerator.setCountryCode("-de");
-//		mapBooksService.setIsbnGenerator(randomIsbnGenerator);
-//		mapBooksService.setStoreService(new SimpleStoreService());
-//		randomIsbnGenerator.setPrefix("TEST:");
-//		
-//		TestActor.doTest(mapBooksService);
-//		
-//	
-//	}
 
+	@Test public void testDataSource() throws Exception{
+		Connection con = dataSource.getConnection();
+		Assert.assertNotNull(con);
+		con.close();
+	}
 	
 
 }
