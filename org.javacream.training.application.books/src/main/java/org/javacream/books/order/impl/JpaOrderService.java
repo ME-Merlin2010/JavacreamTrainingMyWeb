@@ -90,11 +90,6 @@ public class JpaOrderService implements OrderService{
 		return newOrder;
 	}
 
-	@Override
-	public Order findById(long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	@Transactional
