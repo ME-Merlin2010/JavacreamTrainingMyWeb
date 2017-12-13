@@ -17,7 +17,7 @@
 	</bean>
 	<bean class="org.javacream.books.isbngenerator.impl.CounterIsbnGenerator"
 		id="counterIsbnGenerator" parent="parentIsbnGenerator">
-		<qualifier value="sequence"></qualifier>
+<!-- 		<qualifier value="sequence"></qualifier> -->
 	</bean>
 
 </beans>

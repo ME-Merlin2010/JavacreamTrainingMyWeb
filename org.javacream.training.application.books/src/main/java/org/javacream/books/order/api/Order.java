@@ -2,6 +2,12 @@ package org.javacream.books.order.api;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity(name="OrderEntity")
+@Table(name="ORDER_TABLE")
 public class Order implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -51,6 +57,8 @@ public class Order implements Serializable{
 		this.totalPrice = totalPrice;
 		this.orderStatus = orderStatus;
 	}
+	
+	@Id
 	private long orderId;
 	private String isbn;
 	private double totalPrice;

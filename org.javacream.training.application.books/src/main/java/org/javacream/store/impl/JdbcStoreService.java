@@ -10,6 +10,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class JdbcStoreService implements StoreService {
@@ -17,6 +19,7 @@ public class JdbcStoreService implements StoreService {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
+	@Transactional(propagation=Propagation.REQUIRED)
 	public int getStock(final String category, final String item) {
 		return jdbcTemplate.execute(" select stock from stock where category=? and item=?",
 				new PreparedStatementCallback<Integer>() {
