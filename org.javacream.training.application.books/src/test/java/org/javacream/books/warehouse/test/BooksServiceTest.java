@@ -3,13 +3,15 @@ package org.javacream.books.warehouse.test;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.sql.DataSource;
 
+import org.javacream.books.warehouse.api.BookException;
 import org.javacream.books.warehouse.api.BooksService;
-import org.javacream.books.warehouse.impl.MapBooksService;
+import org.javacream.books.warehouse.impl.JpaBooksService;
 import org.javacream.store.api.StoreService;
 import org.javacream.store.impl.JdbcStoreService;
 import org.junit.Assert;
@@ -35,6 +37,9 @@ import org.springframework.transaction.annotation.Transactional;
 @ContextConfiguration("classpath:application.xml")
 public class BooksServiceTest {
 
+	@Test public void insertOne() throws BookException {
+			booksService.newBook("FROM TEST @ " + new Date());
+	}
 	@Autowired
 	private BooksService booksService;
 
@@ -84,7 +89,7 @@ public class BooksServiceTest {
 	//@Test 
 	public void testCastWithoutProxyOk(){
 		@SuppressWarnings("unused")
-		MapBooksService mapBooksService = (MapBooksService) booksService;
+		JpaBooksService mapBooksService = (JpaBooksService) booksService;
 	}
 	@Test(expected=ClassCastException.class) 
 	public void testCastWithProxyMustFail(){
