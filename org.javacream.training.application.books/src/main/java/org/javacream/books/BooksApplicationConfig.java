@@ -14,5 +14,9 @@ public class BooksApplicationConfig {
 //		simpleStoreService.setStock(stock);
 //		return simpleStoreService;
 //	}
+	static {
+		System.setProperty("http.proxyHost", "dsvbm");
+		System.setProperty("http.proxyPort", "8080");
 
+	}
 }
