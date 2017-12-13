@@ -99,7 +99,7 @@ public class JpaOrderService implements OrderService{
 	@Override
 	@Transactional
 	public void delete(Order order) {
-		deleteOk(order);
+		this.deleteOk(order);
 		
 	}
 
